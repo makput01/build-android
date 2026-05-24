@@ -33,7 +33,7 @@ target_include_directories(loader PRIVATE
 
 # Tautkan perpustakaan
 target_link_libraries(
-    native-lib
+    loader
     imgui
     android
     EGL
