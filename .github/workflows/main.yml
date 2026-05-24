@@ -3,9 +3,9 @@ name: Build Android with Gradle
 # Kapan alur kerja ini berjalan
 on:
   push:
-    branches: [ main, develop ] # Jalankan saat ada perubahan ke cabang ini
+    branches: [ master ] # Jalankan saat ada perubahan ke cabang ini
   pull_request:
-    branches: [ main ] # Jalankan juga saat ada permintaan tarik ke cabang utama
+    branches: [ master ] # Jalankan juga saat ada permintaan tarik ke cabang utama
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin' # Jenis distribusi Java yang direkomendasikan
 
       # 3. Berikan izin eksekusi ke berkas gradlew (penting agar tidak gagal)
@@ -39,4 +39,3 @@ jobs:
           name: Aplikasi-Android-Hasil-Build
           path: app/build/outputs/apk/debug/app-debug.apk
           # Jika pakai rilis: ganti path ke app/build/outputs/apk/release/app-release.apk
-
