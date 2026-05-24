@@ -4,9 +4,19 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private GLSurfaceView glView;
+
+    static {
+        System.loadLibrary("loader");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        glView = new GLSurfaceView(this);
+        glView.setEGLContextClientVersion(3);
+        glView.setRenderer(new ImGuiRenderer());
+        setContentView(glView);
     }
 }
+
