@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 36
+    namespace "com.mycompany.application"
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/AndroidManifest.xml'
+            java.srcDirs = ['src/java']
+            res.srcDirs = ['src/res']
+            assets.srcDirs = ['src/assets']
+            aidl.srcDirs = ['src/aidl']
+            jniLibs.srcDirs = ['src/jniLibs']
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.mycompany.application"
+        minSdkVersion 26
+        targetSdkVersion 36
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters "arm64-v8a"
+        }
+
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_STL=c++_static"
+            }
+        }
+
+        signingConfig signingConfigs.debug
+        ndkVersion "26.3.11579264"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            debuggable false
+            jniDebuggable false
+            testCoverageEnabled false
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        prefab true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    externalNativeBuild {
+        //ndkBuild {
+        //    path file('src/native/Android.mk')
+        //}
+        cmake {
+            path file('src/native/CMakeLists.txt')
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'jars', include: ['*.jar'])
+    api fileTree(dir: 'jars', include: ['*.jar'])
+}
