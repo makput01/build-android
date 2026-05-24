@@ -1,5 +1,4 @@
 package com.android.support;
-package com.example.imgui_app;
 
 import android.opengl.GLSurfaceView;
 
