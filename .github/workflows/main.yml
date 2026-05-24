@@ -36,6 +36,6 @@ jobs:
       - name: Simpan hasil APK
         uses: actions/upload-artifact@v4
         with:
-          name: Aplikasi-Android-Hasil-Build
+          name: app
           path: app/build/outputs/apk/debug/app-debug.apk
           # Jika pakai rilis: ganti path ke app/build/outputs/apk/release/app-release.apk
