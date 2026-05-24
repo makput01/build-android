@@ -21,7 +21,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: '17'
           distribution: 'temurin' # Jenis distribusi Java yang direkomendasikan
 
       # 3. Berikan izin eksekusi ke berkas gradlew (penting agar tidak gagal)
