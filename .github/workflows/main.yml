@@ -1,0 +1,42 @@
+name: Build Android with Gradle
+
+# Kapan alur kerja ini berjalan
+on:
+  push:
+    branches: [ main, develop ] # Jalankan saat ada perubahan ke cabang ini
+  pull_request:
+    branches: [ main ] # Jalankan juga saat ada permintaan tarik ke cabang utama
+
+jobs:
+  build:
+    name: Build Aplikasi Android
+    runs-on: ubuntu-latest # Gunakan sistem operasi Linux terbaru
+
+    steps:
+      # 1. Ambil kode sumber dari repositori
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      # 2. Siapkan lingkungan Java (Android butuh Java)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin' # Jenis distribusi Java yang direkomendasikan
+
+      # 3. Berikan izin eksekusi ke berkas gradlew (penting agar tidak gagal)
+      - name: Berikan izin gradlew
+        run: chmod +x ./gradlew
+
+      # 4. Jalankan proses build menggunakan Gradle
+      - name: Lakukan Build dengan Gradle
+        run: ./gradlew assembleDebug # Gunakan assembleRelease untuk versi rilis
+
+      # 5. Simpan hasil berkas APK sebagai artefak (bisa diunduh)
+      - name: Simpan hasil APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aplikasi-Android-Hasil-Build
+          path: app/build/outputs/apk/debug/app-debug.apk
+          # Jika pakai rilis: ganti path ke app/build/outputs/apk/release/app-release.apk
+
